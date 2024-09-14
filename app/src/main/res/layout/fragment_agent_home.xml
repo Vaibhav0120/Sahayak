@@ -220,6 +220,7 @@
 
                 <!-- Item 4-->
                 <LinearLayout
+                    android:id="@+id/eventBtn"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
                     android:layout_weight="0.25"
@@ -278,6 +279,7 @@
 
                 <!-- Item 2-->
                 <LinearLayout
+                    android:id="@+id/AlertButton"
                     android:layout_width="0dp"
                     android:layout_height="80dp"
                     android:layout_weight="0.25"

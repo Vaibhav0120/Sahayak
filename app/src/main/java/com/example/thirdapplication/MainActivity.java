@@ -37,70 +37,42 @@ public class MainActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         Objects.requireNonNull(getSupportActionBar()).hide();
 
-        // Make full-screen
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         setContentView(R.layout.activity_main);
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        // Get the navigation view and set the listener
+        // Get navigation view and set the listener
         BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getItemId() == R.id.navigationHome) {
-                    loadFragment(isAgent ? new AgentHomeFragment() : new HomeFragment());
-                    return true;
-                } else if (item.getItemId() == R.id.navigationDashboard) {
-                    loadFragment(new DashboardFragment());
-                    return true;
-                } else if (item.getItemId() == R.id.navigationNotifications) {
-                    loadFragment(new NotificationsFragment());
-                    return true;
-                }
-                return false;
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            if (item.getItemId() == R.id.navigationHome) {
+                loadFragment(isAgent ? new AgentHomeFragment() : new HomeFragment());
+                return true;
+            } else if (item.getItemId() == R.id.navigationDashboard) {
+                loadFragment(new DashboardFragment());
+                return true;
+            } else if (item.getItemId() == R.id.navigationNotifications) {
+                loadFragment(new NotificationsFragment());
+                return true;
             }
+            return false;
         });
 
-        // Check if user is logged in and determine if they are an agent
+        // Retrieve user status from intent
         Intent intent = getIntent();
         boolean isGuest = intent.getBooleanExtra("isGuest", false);
+        isAgent = intent.getBooleanExtra("isAgent", false);
+
         if (isGuest) {
-            // For guest login, directly show HomeFragment
             loadFragment(new HomeFragment());
         } else if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-            checkIfUserIsAgent();
+            // Load the appropriate fragment based on whether the user is an agent
+            loadFragment(isAgent ? new AgentHomeFragment() : new HomeFragment());
         } else {
-            // Handle case where user is not logged in (e.g., redirect to login)
+            // Redirect to login if user is not logged in
             startActivity(new Intent(this, LoginActivity.class));
             finish();
         }
-    }
-
-    private void checkIfUserIsAgent() {
-        String uid = mAuth.getCurrentUser().getUid();
-        db.collection("User").document(uid).get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        DocumentSnapshot document = task.getResult();
-                        if (document.exists()) {
-                            Boolean agent = document.getBoolean("agent");
-                            isAgent = (agent != null && agent);
-                            // Load the appropriate fragment based on user type
-                            loadFragment(isAgent ? new AgentHomeFragment() : new HomeFragment());
-                        } else {
-                            // Handle case where no document exists for user
-                            startActivity(new Intent(this, LoginActivity.class));
-                            finish();
-                        }
-                    } else {
-                        // Handle error
-                        startActivity(new Intent(this, LoginActivity.class));
-                        finish();
-                    }
-                });
     }
 
     private void loadFragment(Fragment fragment) {

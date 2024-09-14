@@ -13,9 +13,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -34,18 +31,18 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+
         // Check if user is already logged in
-        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-            // Redirect to MainActivity if logged in
-            startActivity(new Intent(this, MainActivity.class));
-            finish();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+            // User is already logged in, check if they are an agent or not
+            checkIfUserIsAgent(currentUser.getUid());
             return;
         }
 
         setContentView(R.layout.activity_login);
-
-        mAuth = FirebaseAuth.getInstance();
-        db = FirebaseFirestore.getInstance();
 
         editTextEmail = findViewById(R.id.email);
         editTextPassword = findViewById(R.id.password);
@@ -53,25 +50,35 @@ public class LoginActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
         registerNow = findViewById(R.id.registerNow);
 
-        // Add click listener for login button
-        buttonLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                loginUser();
-            }
-        });
+        // Login button click listener
+        buttonLogin.setOnClickListener(view -> loginUser());
 
-        // Add click listener for registerNow TextView
-        registerNow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Navigate to RegisterActivity
-                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivity(intent);
-            }
+        // Navigate to registration screen
+        registerNow.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+            startActivity(intent);
         });
     }
 
+    // Method for checking agent status for logged-in users
+    private void checkIfUserIsAgent(String uid) {
+        db.collection("User").document(uid).get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document != null && document.exists()) {
+                            Boolean isAgent = document.getBoolean("agent");
+                            startMainActivity(isAgent != null && isAgent);
+                        } else {
+                            Toast.makeText(LoginActivity.this, "User data not found.", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(LoginActivity.this, "Failed to check user data.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    // Method to log in the user if they are not already logged in
     private void loginUser() {
         progressBar.setVisibility(View.VISIBLE);
         String email = editTextEmail.getText().toString().trim();
@@ -90,45 +97,28 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        progressBar.setVisibility(View.GONE);
-                        if (task.isSuccessful()) {
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            if (user != null) {
-                                checkIfUserIsAgent(user.getUid());
-                            } else {
-                                Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
-                            }
+                .addOnCompleteListener(task -> {
+                    progressBar.setVisibility(View.GONE);
+                    if (task.isSuccessful()) {
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        if (user != null) {
+                            checkIfUserIsAgent(user.getUid());
                         } else {
-                            String errorMessage = task.getException().getMessage();
-                            Toast.makeText(LoginActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
                         }
+                    } else {
+                        String errorMessage = task.getException().getMessage();
+                        Toast.makeText(LoginActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
                     }
                 });
     }
 
-    private void checkIfUserIsAgent(String uid) {
-        db.collection("User").document(uid).get()
-                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            DocumentSnapshot document = task.getResult();
-                            if (document != null && document.exists()) {
-                                Boolean isAgent = document.getBoolean("agent");
-                                Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
-                                myIntent.putExtra("isAgent", isAgent != null && isAgent);  // Pass "isAgent" status to MainActivity
-                                startActivity(myIntent);
-                                finish();
-                            } else {
-                                Toast.makeText(LoginActivity.this, "User data not found.", Toast.LENGTH_SHORT).show();
-                            }
-                        } else {
-                            Toast.makeText(LoginActivity.this, "Failed to check user data.", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+    // Method to start the MainActivity with the agent status
+    private void startMainActivity(boolean isAgent) {
+        Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
+        myIntent.putExtra("isAgent", isAgent);  // Pass "isAgent" status to MainActivity
+        myIntent.putExtra("isGuest", false);    // Ensure this is not a guest
+        startActivity(myIntent);
+        finish();
     }
 }
