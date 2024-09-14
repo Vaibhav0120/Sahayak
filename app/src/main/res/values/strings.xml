@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">Sahayak</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Map</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="register">Register</string>
+    <string name="click_to_login">Click to Login</string>
+    <string name="click_to_register">Click To Register!</string>
+    <string name="guest_user">Guest User</string>
+    <string name="map">Map</string>
+    <string name="disaster_related_info">Disaster-related Info</string>
+    <string name="police">Police</string>
+    <string name="ambulance">Ambulance</string>
+    <string name="call_search_and_rescue_helpline">Call Search And Rescue Helpline</string>
+    <string name="call_electricity_emergency_helpline">Call Electricity Emergency Helpline</string>
+    <string name="child_helpline_number">Child Helpline Number</string>
+    <string name="accident_helpline_number">Accident Helpline Number</string>
+    <string name="add_emergency_contact">Add Emergency Contact</string>
+    <string name="mostly_cloudy">Mostly Cloudy</string>
+    <string name="_31_c">31°c</string>
+    <string name="_28_c">28°c</string>
+    <string name="h_33_l_L_25">H:33°c   L:25°c</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

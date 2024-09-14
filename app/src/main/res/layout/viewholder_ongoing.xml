@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ongoingLayout"
+    android:layout_width="match_parent"
+    android:layout_height="167dp"
+    android:layout_margin="8dp"
+    android:background="@drawable/mini_icon_bg_home">
+
+    <TextView
+        android:id="@+id/IncidentDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="June 26, 2023"
+        android:textColor="@color/darkblue"
+        android:textSize="14sp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ongoingIcon"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ongoing1"
+        app:layout_constraintStart_toStartOf="@+id/IncidentDate"
+        app:layout_constraintTop_toBottomOf="@+id/IncidentDate" />
+
+    <TextView
+        android:id="@+id/placeName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Seemapuri Delhi"
+        android:textColor="@color/darkblue"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/ongoingIcon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/ongoingIcon"
+        app:layout_constraintTop_toTopOf="@+id/ongoingIcon" />
+
+    <TextView
+        android:id="@+id/text_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Progress"
+        android:textColor="@color/darkblue"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/ongoingIcon"
+        app:layout_constraintTop_toBottomOf="@+id/ongoingIcon" />
+
+    <ProgressBar
+        android:id="@+id/progressBarOngoing"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:max="100"
+        android:progress="40"
+        android:progressTint="@color/darkblue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_progress" />
+
+    <TextView
+        android:id="@+id/progress_percentage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="40%"
+        android:textColor="@color/darkblue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/progressBarOngoing"
+        app:layout_constraintTop_toBottomOf="@+id/progressBarOngoing" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

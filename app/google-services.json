@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "532660433005",
+    "project_id": "resister-login-sih",
+    "storage_bucket": "resister-login-sih.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:532660433005:android:28fa2367f2ce57b65e8f64",
+        "android_client_info": {
+          "package_name": "com.example.thirdapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAm_CYbkkXNpKyciC_ppHfzy8pkWUd38Lg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
