@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.thirdapplication.ui.Machine_Learning.ML_Fragment;
 import com.example.thirdapplication.ui.dashboard.DashboardFragment;
 import com.example.thirdapplication.ui.home.AgentHomeFragment;
 import com.example.thirdapplication.ui.home.HomeFragment;
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                 loadFragment(isAgent ? new AgentHomeFragment() : new HomeFragment());
                 return true;
             } else if (item.getItemId() == R.id.navigationDashboard) {
-                loadFragment(new DashboardFragment());
+                loadFragment(new ML_Fragment());
                 return true;
             } else if (item.getItemId() == R.id.navigationNotifications) {
                 loadFragment(new NotificationsFragment());
