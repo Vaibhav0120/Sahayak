@@ -14,12 +14,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.fragment.app.FragmentTransaction; // Import to handle fragment transactions
 
 import com.example.thirdapplication.Adapter.OngoingAdapter;
 import com.example.thirdapplication.Domain.OngoingDomain;
 import com.example.thirdapplication.LoginActivity;
 import com.example.thirdapplication.R;
 import com.example.thirdapplication.databinding.FragmentAgentHomeBinding;
+import com.example.thirdapplication.ui.Events.EventFragment; // Import EventFragment
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -51,6 +53,7 @@ public class AgentHomeFragment extends Fragment {
         loadUserData(); // Load user data from Firestore
         initRecyclerView(); // Initialize RecyclerView
         setupLogout(); // Setup logout functionality
+        setupEventButton(); // Setup event button click listener
 
         return binding.getRoot(); // Return the root view from the binding
     }
@@ -101,6 +104,17 @@ public class AgentHomeFragment extends Fragment {
 
             // Finish the current fragment/activity
             getActivity().finish();
+        });
+    }
+
+    private void setupEventButton() {
+        // Set click listener for the event button (eventBtn)
+        binding.eventBtn.setOnClickListener(v -> {
+            // Perform fragment transaction to replace AgentHomeFragment with EventFragment
+            FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+            transaction.replace(R.id.nav_host_fragment_activity_main, new EventFragment()); // Replace with EventFragment
+            transaction.addToBackStack(null); // Add to back stack so the user can navigate back
+            transaction.commit(); // Commit the transaction
         });
     }
 

@@ -34,10 +34,10 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        // Check if user is already logged in
+        // Check if the user is already logged in
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
-            // User is already logged in, check if they are an agent or not
+            // User is logged in, check if agent or normal user
             checkIfUserIsAgent(currentUser.getUid());
             return;
         }
@@ -62,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
 
     // Method for checking agent status for logged-in users
     private void checkIfUserIsAgent(String uid) {
+        // Avoid blocking the UI thread; retrieve user data asynchronously
         db.collection("User").document(uid).get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
