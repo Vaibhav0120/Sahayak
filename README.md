@@ -71,7 +71,8 @@ With user-specific dashboards, emergency contact info, training simulations, and
 <p align="center">
 
 ### 🧑‍💻 User Dashboard  
-![User Dashboard](https://github.com/user-attachments/assets/8e45bd69-9493-4796-aff3-eaed038e58cc)
+
+<img src="https://github.com/user-attachments/assets/8e45bd69-9493-4796-aff3-eaed038e58cc"  width="70%" height="70%">
 
 ### 🧑‍🚒 Agent Dashboard  
 ![Agent Dashboard](https://github.com/user-attachments/assets/01a74bd9-2b94-4193-849b-6dd7a72e84ce)
