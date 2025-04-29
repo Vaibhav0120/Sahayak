@@ -1,13 +1,8 @@
-# 🛟 Sahayak  
+<h1 align="center">🛟 Sahayak</h1>
+
 **A Smart Disaster Management & Citizen Support System**
 
-> Built using **Firebase**, **Android Studio**, **Java & Kotlin**
-
-> Diagram
- <p align="center">
-  <img src="https://github.com/user-attachments/assets/42ede4a3-247a-4483-ba4a-6ef8717489eb" width="70%" height="70%">
- </p>
-
+Built using **Firebase**, **Android Studio**, **Java & Kotlin**
 ---
 
 ## 🔍 Overview
@@ -64,6 +59,12 @@ With user-specific dashboards, emergency contact info, training simulations, and
 5. Run the app on an emulator or physical device
 
 ---
+
+## 📸 Diagram
+
+ <p align="center">
+  <img src="https://github.com/user-attachments/assets/42ede4a3-247a-4483-ba4a-6ef8717489eb" width="70%" height="70%">
+ </p>
 
 ## 🖼️ Screenshots
 User Dashboard
