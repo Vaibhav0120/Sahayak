@@ -68,18 +68,18 @@ With user-specific dashboards, emergency contact info, training simulations, and
 
 ## 🖼️ Screenshots
 
-<p align="center">
+<div align="center">
 
 <h3>🧑‍💻 User Dashboard</h3>
-<img src="https://github.com/user-attachments/assets/8e45bd69-9493-4796-aff3-eaed038e58cc" width="50%"/>
+<img src="https://github.com/user-attachments/assets/8e45bd69-9493-4796-aff3-eaed038e58cc" width="70%" height="70%"/>
 
 <h3>🧑‍🚒 Agent Dashboard</h3>
-<img src="https://github.com/user-attachments/assets/01a74bd9-2b94-4193-849b-6dd7a72e84ce" width="50%"/>
+<img src="https://github.com/user-attachments/assets/01a74bd9-2b94-4193-849b-6dd7a72e84ce" width="70%" height="70%"/>
 
 <h3>🔍 Prediction Page</h3>
-<img src="https://github.com/user-attachments/assets/12e68a77-4e28-4696-97fb-97b64473c519" width="50%"/>
+<img src="https://github.com/user-attachments/assets/12e68a77-4e28-4696-97fb-97b64473c519" width="70%" height="70%"/>
 
 <h3>🗺️ Live Map Page</h3>
-<img src="https://github.com/user-attachments/assets/8050d3cb-f98c-45ee-8983-47de4fe5c2ad" width="50%"/>
+<img src="https://github.com/user-attachments/assets/8050d3cb-f98c-45ee-8983-47de4fe5c2ad" width="70%" height="70%"/>
 
-</p>
+</div>
