@@ -68,6 +68,8 @@ With user-specific dashboards, emergency contact info, training simulations, and
 
 ## 🖼️ Screenshots
 
+<p align="center">
+
 ### 🧑‍💻 User Dashboard  
 ![User Dashboard](https://github.com/user-attachments/assets/8e45bd69-9493-4796-aff3-eaed038e58cc)
 
@@ -79,3 +81,5 @@ With user-specific dashboards, emergency contact info, training simulations, and
 
 ### 🗺️ Live Map Page  
 ![Live Map Page](https://github.com/user-attachments/assets/8050d3cb-f98c-45ee-8983-47de4fe5c2ad)
+
+</p>
